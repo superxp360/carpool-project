@@ -1,12 +1,14 @@
 
 import AvailablePoolsList from "./components/AvaliablePoolsList"
 import NavBar from "./components/navBar"
+import AddAvaliablePoolCard from "./components/startPoolForm"
 
 
 export default function Home() {
   return (
-   <main className="bg-gradient-to-b h-screen w-screen from-cyan-100 via-blue-800 to-blue-950">
+   <main className="bg-white">
     <NavBar />
+    <AddAvaliablePoolCard />
     <AvailablePoolsList />
    </main>
   )

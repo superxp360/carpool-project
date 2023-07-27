@@ -4,9 +4,9 @@ export default function AvailablePoolsCard({poolCards}) {
 
     return (
         <>
-      <div className="bg-cyan-200 bg-opacity-50">
-        <div className="grid grid-cols-1">
-          <div className="p-3 border-2 border-black rounded">
+      <div>
+        <div className="grid grid-cols-1 gap-4">
+          <div className="p-3 bg-blue-100 rounded text-blue-800">
             <div className="mx-auto">
             </div>
             <h1>
