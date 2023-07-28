@@ -30,6 +30,10 @@ export default function AvailablePoolsCard({poolCards}) {
               <strong>To:</strong> {poolCards.fromAddress}
             </h1>
 
+            <h1>
+              <strong>BodyStyle:</strong> {poolCards.carBody}
+            </h1>
+
             <div className="text-right">
               <button
                 className="rounded border m-2 border-black bg-blue-600 px-4 py-3 text-sm font-medium text-white hover:bg-transparent hover:text-blue-600 focus:outline-none focus:ring active:text-blue-500"
