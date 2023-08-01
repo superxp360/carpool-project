@@ -1,5 +1,5 @@
 "use client"
-
+import {deleteDoc} from 'f'
 import AvailablePoolsCard from "./AvaliablePoolCards";
 import { useState, useEffect } from "react";
 
@@ -48,30 +48,12 @@ export default function AvailablePoolsList() {
     setPoolCards(filterPoolForm)
   }
   
-
   // use the useEffect hook to fetch the pool cards when the component mounts
   useEffect(() => {
     getPoolCards();
   }, []);
 
-  // useEffect(() => {
-  //   getSedanCards();
-  // }, []);
-
-  // useEffect(() => {
-  //   getSUVCards();
-  // }, []);
-
-  // useEffect(() => {
-  //   getPickUpCards();
-  // }, []);
-
-  // useEffect(() => {
-  //   getCoupeCards();
-  // }, []);
- 
-
-
+  
   return (
     <div>
       <div className="flex flex-row justify-center mt-[160px] mb-[100px]">

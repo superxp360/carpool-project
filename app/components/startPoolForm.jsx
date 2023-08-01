@@ -1,12 +1,14 @@
 "use client"
 import carData from "@/app/data/carDB.json"
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { AuthContext } from "../Login/authContext";
 
 
 
 export default function AddAvaliablePoolCard() {
   
   const [models, setModels] = useState([])
+  const { user } = useContext(AuthContext);
 
 //Car selected bar
   const year = carData.map(car => car.Year);
@@ -47,12 +49,20 @@ export default function AddAvaliablePoolCard() {
       !e.target.fromAddress.value ||
       !e.target.carBody.value) {
       alert("Please fill out all the form fields")
+      return;
 
+      
+    }
+
+    //When user don't login
+    if (!user || !user.uid) {
+      alert("Please login to start a pool")
       return;
     }
 
     // Create a new object with the form data
     const newPoolCard = {
+      uid: user.uid,
       firstName: e.target.firstName.value,
       lastName: e.target.lastName.value,
       email: e.target.email.value,
@@ -89,13 +99,13 @@ export default function AddAvaliablePoolCard() {
         e.target.carBody.value="";
 
       })
-      .catch(alert("All Set"));
+      .catch(alert("Pool Submitted!"));
 
   }
 
   return (
     <>
-      <div className="w-4/5 h-1/2 mt-2 rounded p-10 bg-cover mx-auto bg-no-repeat bg-[url('/everyday_LA.gif')] ">
+      <div className="w-full h-1/2 mt-2 rounded p-10 bg-cover mx-auto bg-no-repeat bg-[url('/everyday_LA.gif')] ">
 
         <div className="flex justify-end">
           <div className="flex flex-col mt-[130px] w-3/4 bg-white m-2 max-w-md px-4 py-8 rounded-lg shadow sm:px-6 sm:w-1/2 md:px-8 md:w-1/2 lg:px-10 lg:w-1/2 border-2">

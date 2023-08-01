@@ -5,7 +5,7 @@ import AddAvaliablePoolCard from "./components/startPoolForm"
 
 export default function Home() {
   return (
-   <main className="bg-white">
+   <main>
     <AddAvaliablePoolCard />
     <AvailablePoolsList />
    </main>
