@@ -5,7 +5,7 @@ import { AuthContext } from "../Login/authContext";
 
 
 
-export default function AddAvaliablePoolCard() {
+export default function AddAvaliablePoolCard(setPoolCards) {
   
   const [models, setModels] = useState([])
   const { user } = useContext(AuthContext);
@@ -33,26 +33,9 @@ export default function AddAvaliablePoolCard() {
 
 
   // Define the addPoolCard function, which is called when the form is submitted
-  const addPoolCard = (e) => {
+  const addPoolCard = async (e) => {
     // Prevent the default form submission behavior
     e.preventDefault();
-
-    // If the first name field is empty, do not submit the form
-    if (!e.target.firstName.value ||
-      !e.target.lastName.value ||
-      !e.target.email.value ||
-      !e.target.carYear.value ||
-      !e.target.carMake.value ||
-      !e.target.carModel.value ||
-      !e.target.numSeats.value ||
-      !e.target.toAddress.value ||
-      !e.target.fromAddress.value ||
-      !e.target.carBody.value) {
-      alert("Please fill out all the form fields")
-      return;
-
-      
-    }
 
     //When user don't login
     if (!user || !user.uid) {
@@ -114,24 +97,24 @@ export default function AddAvaliablePoolCard() {
               <form onSubmit={addPoolCard}>
                 <div className="flex gap-4 mb-2">
                   <div className=" relative ">
-                    <input type="text" name="firstName" className=" rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-blue-100 text-black placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-sky-600 focus:border-transparent
+                    <input type="text" required name="firstName" className=" rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-blue-100 text-black placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-sky-600 focus:border-transparent
                               focus:bg-white" placeholder="First name" />
                   </div>
                   <div className=" relative ">
-                    <input type="text" name="lastName" className=" rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-blue-100 text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-sky-600 focus:border-transparent
+                    <input type="text" required name="lastName" className=" rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-blue-100 text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-sky-600 focus:border-transparent
                               focus:bg-white"  placeholder="Last name" />
                   </div>
                 </div>
                 <div className="m-2">
                   <div className=" relative">
-                    <input type="email" name="email" className=" rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-blue-100 text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-sky-600 focus:border-transparent
+                    <input type="email" required name="email" className=" rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-blue-100 text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-sky-600 focus:border-transparent
                               focus:bg-white" placeholder="Email" />
                   </div>
                 </div>
                 <div id="car" className="m-5">
                   <h1 className="text-center text-sky-400 m-2 text-2xl">Car</h1>
                   <div className="flex flex-row gap-2 mb-2">
-                    <select type="number" className=" rounded-lg border-transparent flex-1 text-sm appearance-none border border-gray-300 w-1/2 py-2 px-4 bg-blue-100 text-gray-700 placeholder-gray-400 shadow-smfocus:outline-none focus:ring-2 focus:ring-sky-600 focus:border-transparent
+                    <select type="number" required className=" rounded-lg border-transparent flex-1 text-sm appearance-none border border-gray-300 w-1/2 py-2 px-4 bg-blue-100 text-gray-700 placeholder-gray-400 shadow-smfocus:outline-none focus:ring-2 focus:ring-sky-600 focus:border-transparent
                               focus:bg-white" id="carYear" placeholder="Year">
                       <option>Year</option>
                       {newYear.map((year) => (
@@ -139,7 +122,7 @@ export default function AddAvaliablePoolCard() {
                       ))}
                     </select>
 
-                    <select type="text" className=" rounded-lg border-transparent flex-1 appearance-none border text-sm border-gray-300 w-1/2 py-2 px-4 bg-blue-100 text-gray-700 placeholder-gray-400 shadow-sm focus:outline-none focus:ring-2 focus:ring-sky-600 focus:border-transparent
+                    <select type="text" required className=" rounded-lg border-transparent flex-1 appearance-none border text-sm border-gray-300 w-1/2 py-2 px-4 bg-blue-100 text-gray-700 placeholder-gray-400 shadow-sm focus:outline-none focus:ring-2 focus:ring-sky-600 focus:border-transparent
                               focus:bg-white" name="carMake" placeholder="Make"
                       onChange={(e)=> getCarModelsForMake(e.target.value)}>
                       <option>Make</option>
@@ -150,7 +133,7 @@ export default function AddAvaliablePoolCard() {
                       ))}
                     </select>
 
-                    <select type="text" className=" rounded-lg border-transparent text-sm flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-blue-100 text-gray-700 placeholder-gray-400 shadow-sm  focus:outline-none focus:ring-2 focus:ring-sky-600 focus:border-transparent focus:bg-white" name="carModel" placeholder="Model">
+                    <select type="text" required className=" rounded-lg border-transparent text-sm flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-blue-100 text-gray-700 placeholder-gray-400 shadow-sm  focus:outline-none focus:ring-2 focus:ring-sky-600 focus:border-transparent focus:bg-white" name="carModel" placeholder="Model">
                       <option>Model</option>
                       {/* map through model state */}
                       {
@@ -163,7 +146,7 @@ export default function AddAvaliablePoolCard() {
                 </div>
 
                 <div>
-                  <select type="number" className=" rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-blue-100 text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-sky-600 focus:border-transparent
+                  <select type="number" required className=" rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-blue-100 text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-sky-600 focus:border-transparent
                           focus:bg-white" name="numSeats">
                     <option>Number of Seats</option>
                     <option>1</option>
@@ -179,18 +162,18 @@ export default function AddAvaliablePoolCard() {
 
                 <div>
 
-                  <input type="text" id="create-account-last-name" className=" mt-3 rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-blue-100 text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-sky-600 focus:border-transparent
+                  <input type="text" required id="create-account-last-name" className=" mt-3 rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-blue-100 text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-sky-600 focus:border-transparent
                           focus:bg-white" name="fromAddress" placeholder="From" />
 
                 </div>
                 <div>
 
-                  <input type="text" id="create-account-last-name" className=" mt-3 rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-blue-100 text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-sky-600 focus:border-transparent
+                  <input type="text" required id="create-account-last-name" className=" mt-3 rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-blue-100 text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-sky-600 focus:border-transparent
                           focus:bg-white" name="toAddress" placeholder="To" />
                 </div>
 
                 <div>
-                <select type="text" className=" mt-3 rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-blue-100 text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-sky-600 focus:border-transparent
+                <select type="text" required className=" mt-3 rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-blue-100 text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-sky-600 focus:border-transparent
                           focus:bg-white" name="carBody" >
                       <option>Body Style</option>
                       <option>Sedan</option>

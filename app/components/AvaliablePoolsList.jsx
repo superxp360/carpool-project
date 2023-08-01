@@ -1,5 +1,5 @@
 "use client"
-import {deleteDoc} from 'f'
+
 import AvailablePoolsCard from "./AvaliablePoolCards";
 import { useState, useEffect } from "react";
 
@@ -74,7 +74,7 @@ export default function AvailablePoolsList() {
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4 m-8">
         {
         poolCards.map((poolCards) => (
-          <AvailablePoolsCard poolCards={poolCards} key={poolCards.id} />
+          <AvailablePoolsCard poolCards={poolCards} key={poolCards.id} setPoolCards={setPoolCards} />
         ))}
       </div>
     </div>

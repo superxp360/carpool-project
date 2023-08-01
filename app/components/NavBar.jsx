@@ -40,11 +40,11 @@ export default function NavBar() {
                                                 <img className="w-[55px] rounded-full border-blue-500 border-2" alt="profil" src={user.photoURL} />
                                             </a>
                                         </div>
-                                        <div class=" flex flex-col">
-                                            <span class="text-lg font-medium text-black">
+                                        <div className=" flex flex-col">
+                                            <span className="text-lg font-medium text-black">
                                                 Hello, {user.displayName}
                                             </span>
-                                            <button onClick={handleSignOut}  class="text-s justify-center w-[90px] rounded bg-sky-400 text-white mt-2">
+                                            <button onClick={handleSignOut}  className="text-s justify-center w-[90px] rounded bg-sky-400 text-white mt-2">
                                                Sign Out 
                                             </button>
                                         </div>
