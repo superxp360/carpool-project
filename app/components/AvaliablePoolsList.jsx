@@ -1,15 +1,15 @@
 "use client"
 
+// Import the "AvailablePoolsCard" component and the "useState" and "useEffect" hooks from React.
 import AvailablePoolsCard from "./AvaliablePoolCards";
 import { useState, useEffect } from "react";
 
-
-
+// Define a React component that displays a list of available carpool rides.
 export default function AvailablePoolsList() {
-  // declare the state variable and its setter function
+  // Declare the "poolCards" state variable and its setter function using the "useState" hook.
   const [poolCards, setPoolCards] = useState([]);
 
-  // define an async function to fetch the pool cards from the server and update the state
+  // Define an asynchronous function to fetch the pool cards from the server and update the state.
   const getPoolCards = async () => {
     const response = await fetch('https://carpool-project-kf.web.app/poolForms');
     const json = await response.json();
@@ -17,7 +17,7 @@ export default function AvailablePoolsList() {
     // set filtered pools to json as well
   };
 
-  // write your filter function
+  // Define a set of filter functions to filter the available pool cards based on the body style of the car.
   const getSedanCards = async () => {
     const response = await fetch('https://carpool-project-kf.web.app/poolForms');
     const json = await response.json();
@@ -48,12 +48,13 @@ export default function AvailablePoolsList() {
     setPoolCards(filterPoolForm)
   }
   
-  // use the useEffect hook to fetch the pool cards when the component mounts
+  // Use the "useEffect" hook to fetch the pool cards when the component mounts.
   useEffect(() => {
     getPoolCards();
   }, []);
 
   
+  // Render the component.
   return (
     <div>
       <div className="flex flex-row justify-center mt-[160px] mb-[100px]">

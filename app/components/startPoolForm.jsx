@@ -1,26 +1,24 @@
 "use client"
-import carData from "@/app/data/carDB.json"
+
+import carData from "@/app/data/carDB.json" // importing car data from a local JSON file
 import { useContext, useState } from "react";
-import { AuthContext } from "../Login/authContext";
-
-
+import { AuthContext } from "../Login/authContext"; // importing AuthContext from another file
 
 export default function AddAvaliablePoolCard(setPoolCards) {
-  
-  const [models, setModels] = useState([])
-  const { user } = useContext(AuthContext);
 
-//Car selected bar
+  const [models, setModels] = useState([]) // defining state for the car models that get displayed based on the selected car make
+  const { user } = useContext(AuthContext); // using useContext to get user authentication information
+
+  // Define the available car years, makes, and body styles
   const year = carData.map(car => car.Year);
   const onlyYear = new Set(year);
   const newYear = [...onlyYear].sort().reverse();
-
 
   const make = carData.map(car => car.Make);
   const onlyMake = new Set(make);
   const newMake = [...onlyMake].sort()
 
-  
+  // Define the function to get the available car models for a selected car make
   const getCarModelsForMake = (make) => {
     const _carModels = carData.filter(car => car.Make === make).map(car => car.Model);
     const set = new Set(_carModels)
@@ -28,16 +26,12 @@ export default function AddAvaliablePoolCard(setPoolCards) {
     setModels(carModels);
   }
 
-  const bodyStyle = carData.map(car => car.Category);
-  const onlyBody = new Set(bodyStyle);
-
-
   // Define the addPoolCard function, which is called when the form is submitted
   const addPoolCard = async (e) => {
     // Prevent the default form submission behavior
     e.preventDefault();
 
-    //When user don't login
+    //Check if the user is authenticated before submitting the form
     if (!user || !user.uid) {
       alert("Please login to start a pool")
       return;
@@ -57,7 +51,6 @@ export default function AddAvaliablePoolCard(setPoolCards) {
       fromAddress: e.target.fromAddress.value,
       carBody: e.target.carBody.value,
     }
-
 
     // Send a POST request to the server with the form data
     fetch("https://carpool-project-kf.web.app/poolForms", {
@@ -83,13 +76,11 @@ export default function AddAvaliablePoolCard(setPoolCards) {
 
       })
       .catch(alert("Pool Submitted!"));
-
-  }
+    }
 
   return (
     <>
       <div className="w-full h-1/2 mt-2 rounded p-10 bg-cover mx-auto bg-no-repeat bg-[url('/everyday_LA.gif')] ">
-
         <div className="flex justify-end">
           <div className="flex flex-col mt-[130px] w-3/4 bg-white m-2 max-w-md px-4 py-8 rounded-lg shadow sm:px-6 sm:w-1/2 md:px-8 md:w-1/2 lg:px-10 lg:w-1/2 border-2">
             <h1 className="text-center text-3xl text-sky-400">Create A Pool</h1>
@@ -135,10 +126,9 @@ export default function AddAvaliablePoolCard(setPoolCards) {
 
                     <select type="text" required className=" rounded-lg border-transparent text-sm flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-blue-100 text-gray-700 placeholder-gray-400 shadow-sm  focus:outline-none focus:ring-2 focus:ring-sky-600 focus:border-transparent focus:bg-white" name="carModel" placeholder="Model">
                       <option>Model</option>
-                      {/* map through model state */}
                       {
-                        models?.map((model, idx) => (
-                          <option key={`model-${idx}`}>{model}</option>
+                        models.map((model) => (
+                          <option key={model}>{model}</option>
                         ))
                       }
                     </select>

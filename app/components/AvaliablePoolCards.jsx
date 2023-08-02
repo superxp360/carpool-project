@@ -1,11 +1,15 @@
+"use client"
 import { useContext } from "react";
 import { AuthContext } from "../Login/authContext";
 
 export default function AvailablePoolsCard({ poolCards, setPoolCards }) {
+  // Use the useContext hook to get the authenticated user from the AuthContext
   const { user } = useContext(AuthContext);
 
+  // Define a function to delete a pool card from the database
   const deletePoolCard = async () => {
     try {
+      // Send a DELETE request to the API endpoint that corresponds to the pool card being deleted
       const res = await fetch(`https://carpool-project-kf.web.app/poolForms/${poolCards.id}`, {
         method: "DELETE",
         headers: {
@@ -13,14 +17,17 @@ export default function AvailablePoolsCard({ poolCards, setPoolCards }) {
         },
       });
       console.log("Deleting pool card");
+      // Parse the response body as JSON to get the updated list of pool cards
       const newPools = await res.json();
+      // Update the state of pool cards with the updated list fetched from the server
       setPoolCards(newPools);
     } catch (error) {
+      // Handle any errors that occur during the DELETE request
       console.error(error);
-   
     }
   };
 
+  // Render a card containing information about an available carpool ride
   return (
     <>
       <div>
@@ -48,6 +55,7 @@ export default function AvailablePoolsCard({ poolCards, setPoolCards }) {
             <h1>
               <strong>BodyStyle:</strong> {poolCards.carBody}
             </h1>
+            {/* Render a delete button that is visible only to the authenticated user who created the pool card */}
             <div className="text-right">
               {user && user.uid === poolCards.uid ? (
                 <button onClick={deletePoolCard} className="rounded mt-5 text-white bg-red-600 w-10 h-10">

@@ -8,7 +8,7 @@ module.exports = {
   theme: {
     extend: {
       backgroundImage: {
-        'form-background': "url('2010_toyota_corolla.jpg')"
+        'form-background': "url('')"
       },
     },
   },
