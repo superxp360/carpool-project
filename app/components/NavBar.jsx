@@ -30,7 +30,7 @@ export default function NavBar() {
     return(
        <>
         <header className="bg-white">
-                <div className="ml-[70px] container flex flex-wrap p-5 flex-col md:flex-row items-center">
+                <div className=" flex flex-row p-5 md:flex-row items-center">
                     <img className="mr-[50px] h-[55px]" src="/carPoolLogo.png" />
                     <div className="ml-auto">
                     {!user ? (<button onClick={handleSignIn} className=" inline-flex text-white items-center bg-sky-400 border-0 py-1 px-3 focus:outline-none hover:bg-gray-200 rounded text-base mt-4 md:mt-0 align-end">Login

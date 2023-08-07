@@ -60,13 +60,13 @@ export default function AvailablePoolsList() {
       </div>
       <div className="flex flex-row justify-center mb-5 space-x-[25px] font-semibold">
         <button className=" focus:bg-sky-400 rounded py-3 px-5" onClick={getPoolCards}>All</button>
-        <h1 className="mt-2 text-xl">|</h1>
+       
         <button onClick={getSedanCards} className=" focus:bg-sky-400 rounded py-3 px-5">Sedan</button>
-        <h1 className="mt-2 text-xl">|</h1>
+       
         <button onClick={getSUVCards} className=" focus:bg-sky-400 rounded py-3 px-5">SUV</button>
-        <h1 className="mt-2 text-xl">|</h1>
+       
         <button onClick={getPickUpCards} className=" focus:bg-sky-400 rounded py-3 px-5">PickUp</button>
-        <h1 className="mt-2 text-xl">|</h1>
+       
         <button onClick={getCoupeCards}className="focus:bg-sky-400 rounded py-3 px-5">Coupe</button>
       </div>
       <div className="grid grid-cols-1 gap-4 lg:grid-cols-3 lg:gap-8">
