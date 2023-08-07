@@ -1,15 +1,17 @@
 "use client"
 
-import carData from "@/app/data/carDB.json" // importing car data from a local JSON file
+import carData from "@/app/data/carDB.json" 
 import { useContext, useState } from "react";
-import { AuthContext } from "../Login/authContext"; // importing AuthContext from another file
+import { AuthContext } from "../Login/authContext"; 
 
 export default function AddAvaliablePoolCard(setPoolCards) {
+  
+  
 
-  const [models, setModels] = useState([]) // defining state for the car models that get displayed based on the selected car make
-  const { user } = useContext(AuthContext); // using useContext to get user authentication information
+  const [models, setModels] = useState([])
+  const { user } = useContext(AuthContext); 
 
-  // Define the available car years, makes, and body styles
+  // Define the available year and make
   const year = carData.map(car => car.Year);
   const onlyYear = new Set(year);
   const newYear = [...onlyYear].sort().reverse();
@@ -26,18 +28,14 @@ export default function AddAvaliablePoolCard(setPoolCards) {
     setModels(carModels);
   }
 
-  // Define the addPoolCard function, which is called when the form is submitted
+  // Define the addPoolCard function
   const addPoolCard = async (e) => {
-    // Prevent the default form submission behavior
     e.preventDefault();
-
-    //Check if the user is authenticated before submitting the form
     if (!user || !user.uid) {
       alert("Please login to start a pool")
       return;
     }
 
-    // Create a new object with the form data
     const newPoolCard = {
       uid: user.uid,
       firstName: e.target.firstName.value,
@@ -51,8 +49,8 @@ export default function AddAvaliablePoolCard(setPoolCards) {
       fromAddress: e.target.fromAddress.value,
       carBody: e.target.carBody.value,
     }
+    
 
-    // Send a POST request to the server with the form data
     fetch("https://carpool-project-kf.web.app/poolForms", {
       method: 'POST',
       headers: {
@@ -62,7 +60,6 @@ export default function AddAvaliablePoolCard(setPoolCards) {
     })
       .then(res => res.json())
       .then(() => {
-        // Clear the form fields after a successful submission
         e.target.firstName.value = "";
         e.target.lastName.value = "";
         e.target.email.value = "";
@@ -73,21 +70,24 @@ export default function AddAvaliablePoolCard(setPoolCards) {
         e.target.toAddress.value = "";
         e.target.fromAddress.value = "";
         e.target.carBody.value="";
-
       })
-      .catch(alert("Pool Submitted!"));
+      .finally(alert("Pool Submitted!"));
     }
 
   return (
     <>
       <div className="w-full h-1/2 mt-2 rounded p-10 bg-cover mx-auto bg-no-repeat bg-[url('/everyday_LA.gif')] ">
         <div className="flex justify-end">
-          <div className="flex flex-col mt-[130px] w-3/4 bg-white m-2 max-w-md px-4 py-8 rounded-lg shadow sm:px-6 sm:w-1/2 md:px-8 md:w-1/2 lg:px-10 lg:w-1/2 border-2">
-            <h1 className="text-center text-3xl text-sky-400">Create A Pool</h1>
-            <div className="p-6 mt-8">
+          <div className="flex flex-col mt-[130px] w-3/4 bg-white m-2 max-w-md px-4 py-8 rounded-2xl shadow sm:px-6 sm:w-1/2 md:px-8 md:w-1/2 lg:px-10 lg:w-1/2 ">
+            <h1 className="text-center mt-2 text-3xl text-sky-400">Create A Pool</h1>
+            <br></br>
+            {!user || !user.uid ? (
+                <p className="text-red-500 text-center">* Must be logged in to start a pool</p>
+              ) : null}
+            <div className="p-5">
               <form onSubmit={addPoolCard}>
                 <div className="flex gap-4 mb-2">
-                  <div className=" relative ">
+                  <div className="relative">
                     <input type="text" required name="firstName" className=" rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-blue-100 text-black placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-sky-600 focus:border-transparent
                               focus:bg-white" placeholder="First name" />
                   </div>
@@ -132,6 +132,16 @@ export default function AddAvaliablePoolCard(setPoolCards) {
                         ))
                       }
                     </select>
+
+                    <select type="text" required className="rounded-lg border-transparent text-sm flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-blue-100 text-gray-700 placeholder-gray-400 shadow-sm  focus:outline-none focus:ring-2 focus:ring-sky-600 focus:border-transparent focus:bg-white" name="carBody" >
+                      <option>Body Style</option>
+                      <option>Sedan</option>
+                      <option>SUV</option>
+                      <option>Pick-up</option>
+                      <option>Coupe</option>
+                      </select>
+
+
                   </div>
                 </div>
 
@@ -154,7 +164,6 @@ export default function AddAvaliablePoolCard(setPoolCards) {
 
                   <input type="text" required id="create-account-last-name" className=" mt-3 rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-blue-100 text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-sky-600 focus:border-transparent
                           focus:bg-white" name="fromAddress" placeholder="From" />
-
                 </div>
                 <div>
 
@@ -162,18 +171,7 @@ export default function AddAvaliablePoolCard(setPoolCards) {
                           focus:bg-white" name="toAddress" placeholder="To" />
                 </div>
 
-                <div>
-                <select type="text" required className=" mt-3 rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-blue-100 text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-sky-600 focus:border-transparent
-                          focus:bg-white" name="carBody" >
-                      <option>Body Style</option>
-                      <option>Sedan</option>
-                      <option>SUV</option>
-                      <option>Pick-up</option>
-                      <option>Coupe</option>
-                </select>
-                </div>
-
-                <div className="flex w-full my-4">
+                <div className="flex w-full my-4 mt-5">
                   <button type="submit" name="submitButton" className="py-2 px-4 mt-2 bg-sky-400 hover:bg-sky-500 focus:ring-sky-500 focus:ring-offset-sky-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg ">
                     Start a Pool!
                   </button>
