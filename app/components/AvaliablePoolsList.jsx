@@ -58,16 +58,16 @@ export default function AvailablePoolsList() {
       <div className="flex flex-row justify-center mt-20 mb-10">
         <h1 className="text-center text-6xl text-sky-400 font-sans">Available Pools</h1>
       </div>
-      <div className="flex flex-row justify-center mb-5 space-x-[25px] font-semibold">
-        <button className=" focus:bg-sky-400 rounded py-3 px-5" onClick={getPoolCards}>All</button>
-       
-        <button onClick={getSedanCards} className=" focus:bg-sky-400 rounded py-3 px-5">Sedan</button>
-       
-        <button onClick={getSUVCards} className=" focus:bg-sky-400 rounded py-3 px-5">SUV</button>
-       
-        <button onClick={getPickUpCards} className=" focus:bg-sky-400 rounded py-3 px-5">PickUp</button>
-       
-        <button onClick={getCoupeCards}className="focus:bg-sky-400 rounded py-3 px-5">Coupe</button>
+      <div className="flex flex-row mr-5 ml-5 justify-center mb-5 space-x-[5px] font-semibold">
+        <button className="hover:bg-sky-400 focus:bg-sky-400 rounded py-3 px-5" onClick={getPoolCards}>All</button>
+        <h1 className="mt-3">|</h1>
+        <button onClick={getSedanCards} className="hover:bg-sky-400 focus:bg-sky-400 rounded py-3 px-5">Sedan</button>
+        <h1 className="mt-3">|</h1>
+        <button onClick={getSUVCards} className="hover:bg-sky-400 focus focus:bg-sky-400 rounded py-3 px-5">SUV</button>
+        <h1 className="mt-3">|</h1>
+        <button onClick={getPickUpCards} className="hover:bg-sky-400 focus focus:bg-sky-400 rounded py-3 px-5">PickUp</button>
+        <h1 className="mt-3">|</h1>
+        <button onClick={getCoupeCards}className=" hover:bg-sky-400 focus focus:bg-sky-400 rounded py-3 px-5">Coupe</button>
       </div>
       <div className="grid grid-cols-1 gap-4 lg:grid-cols-3 lg:gap-8">
         {poolCards.length === 0 ? (
